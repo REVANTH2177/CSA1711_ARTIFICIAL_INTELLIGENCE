@@ -1,5 +1,4 @@
 from collections import deque
-
 def solve():
     start = (3, 3, 0)
     goal = (0, 0, 1)
