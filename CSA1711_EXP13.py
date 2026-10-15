@@ -1,0 +1,31 @@
+
+import math
+
+def minimax(depth, index, maximizing, scores, height):
+    if depth == height:
+        return scores[index]
+
+    if maximizing:
+        return max(
+            minimax(depth + 1, index * 2, False,
+                    scores, height),
+            minimax(depth + 1, index * 2 + 1, False,
+                    scores, height)
+        )
+    else:
+        return min(
+            minimax(depth + 1, index * 2, True,
+                    scores, height),
+            minimax(depth + 1, index * 2 + 1, True,
+                    scores, height)
+        )
+
+scores = [3, 5, 2, 9, 12, 5, 23, 23]
+height = int(math.log2(len(scores)))
+
+print("Minimax Algorithm")
+print("Leaf Node Values:", scores)
+
+result = minimax(0, 0, True, scores, height)
+
+print("Optimal Value:", result)
