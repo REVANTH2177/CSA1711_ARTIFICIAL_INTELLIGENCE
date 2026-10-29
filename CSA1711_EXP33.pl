@@ -1,24 +1,23 @@
 
 % Experiment 33 - Count Number of Vowels
 
-% Check whether a character is a vowel
-vowel(a).
-vowel(e).
-vowel(i).
-vowel(o).
-vowel(u).
+% Define vowels using character codes
+vowel(97).   % a
+vowel(101).  % e
+vowel(105).  % i
+vowel(111).  % o
+vowel(117).  % u
 
 % Base case
 count_vowels([], 0).
 
 % Recursive case
 count_vowels([H|T], Count) :-
-    char_type(H, to_lower(Lower)),
-    count_vowels(T, RestCount),
-    (vowel(Lower) ->
-        Count is RestCount + 1
+    count_vowels(T, Rest),
+    (vowel(H) ->
+        Count is Rest + 1
     ;
-        Count is RestCount
+        Count is Rest
     ).
 
 % Main program
@@ -27,8 +26,9 @@ main :-
     writeln('---------------------------'),
     write('Enter a word or sentence: '),
     read_line_to_string(user_input, Text),
-    string_chars(Text, Characters),
-    count_vowels(Characters, Count),
+    string_lower(Text, LowerText),
+    string_codes(LowerText, Codes),
+    count_vowels(Codes, Count),
     write('Number of Vowels: '),
     writeln(Count).
 
